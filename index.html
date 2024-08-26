@@ -10,25 +10,20 @@
 	<title>War Card Game</title>
 </head>
 <body>
-	<!-- <div class="container"> -->
-	  </div>
-	  <div class="computer">
-		<div id="deck-2-facedown" class="computer card large back-blue shadow"></div>
-		<!-- <div id="deck-2-faceup" class="computer card large outline"></div> -->
-	</div>
+	<div class="container">
+	    <div class="computer">
+		    <div id="computersDrawPile" class="computer card large back-blue shadow"></div>
+	    </div>
 
-	<div class="warcards">
-		<div id="computer-warcards" class="warcards card large outline"></div>
-		<div id="player-warcards" class="warcards card large outline"></div>
-	</div>
+	    <div class="randomDrawCards">
+		    <div id="computersRandomDraw" class="warcards card large outline"></div>
+		    <div id="playersRandomDraw" class="warcards card large outline"></div>
+	    </div>
 
-	<div class="player">
-		<!-- <div id="deck-1-faceup" class="player card large outline"></div> -->
-		<div id="deck-1-facedown" class="player card large back-blue shadow"></div>
-	</div>
-	  <button id="btn" class="btn">Flip Your Card</button>
-	 
-	  
-
+	    <div class="player">
+		    <div id="playersDrawPile" class="player card large back-blue shadow"></div>
+	    </div>
+	    <button id="btn" class="btn">Flip Your Card</button>
+	</div> 
 </body>
 </html>

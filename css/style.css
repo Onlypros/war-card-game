@@ -36,7 +36,39 @@ body {
     border: 2px solid #202d7a;
   }
 
-  #deck-1-faceup {
+ .player {
+    display: flex;
+ }
+ 
+ .computer {
+    display: flex;
+ }
+ 
+#playersDrawPile {
+    display: flex;
+}
+ 
+#computersDrawPile {
+    display: flex;
+} 
+ 
+.randomDrawCards {
+    display: flex;
+}
+ 
+#playersRandomDraw {
+    display: flex;
+}
+
+#computersRandomDraw {
+    display: flex;
+}
+ 
+ 
+ 
+ 
+ 
+  /* #deck-1-faceup {
     display:flex;
     }
   
@@ -62,7 +94,7 @@ body {
   .computer{
     display: flex;
     flex-direction: row;
-align-items:flex-start;
+    margin-top: 40px;
   }
 
   .playercardlargeoutline{
@@ -71,4 +103,4 @@ align-items:flex-start;
 
   .warcards{
     display: flex;
-  }
+  } */

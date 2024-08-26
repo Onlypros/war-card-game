@@ -30,7 +30,7 @@
 ## winning condtions
 - win
 - lose
-- tie
+- draw
 
 ## Additional ideas
 - add war feature
