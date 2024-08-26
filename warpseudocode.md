@@ -1,0 +1,39 @@
+# Project 1 War
+
+## How to play
+1. Take a deck of cards, shuffle and then split in half
+    - Half for the player and half for the computer
+2. Players then flip over the top card of their decks and place them in the middle
+    - Whoever has the highest card wins that round
+        - increase winners score by 1 point
+    - If there is a tie move onto the next round
+3. Repeat until all cards have been dealt
+4. Whoever has the highest score after 26 rounds wins
+5. Add a reset button so they can play again
+
+## browser layout
+    
+### computer container
+- computer deck face down
+- computers score
+         
+### player container
+- players deck face down
+- players score
+- button to flip cards
+    
+### playing area container
+- computers cards face up
+- players cards face up
+- a message for who won that round
+   
+## winning condtions
+- win
+- lose
+- tie
+
+## Additional ideas
+- add war feature
+- cards left in deck?
+- icons for the computer and player
+- audio for the sound of cards shuffling, flipping, war...
