@@ -1,15 +1,13 @@
 // Variables
-// let playersDeck = [] 
-// let computersDeck = []
 let playersPickedDeck = []//player card selected at random to be place face up formerly 'playersPickedCard' think was error
 let computersPickedDeck = []//computer card selected at random to be place face up formerly 'computesPickedCard' think was error
-let playersScore = 0
-let computersScore = 0
+// let playersScore = playersDeck.length; use later?
+// let computersScore = computersDeck.length; use later?
+// let gameover; use later?
 // pickedcard is playersPickedCard and computersPickedCard
 let removePlayersCard //might have issue here also
 let removeComputersCard //might have issue here also
 let count = 0; //tracking draw a card clicks
-
 
 
 // constats
@@ -21,7 +19,12 @@ const computersDeck = shuffledDeck.slice(shuffledDeck.length /2 , shuffledDeck.l
 
 const button = document.getElementById('btn');
 const display = document.getElementById('displayClicks');
+//everything above checks out ^^
 
+// const scoreboard = {
+//     playerScore: 0,
+//     computersScore: 0,
+// }; let here for now to implement later?
 
 
 // Cached element references
@@ -32,60 +35,70 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
 
 
 // Functions
-
-// function getCardValue(playersPickedCard) {
-//     if (playersPickedCard.includes('A') || playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
-//         return 10;
-//     }
-//         return playersPickedCard.slice(1);
-//        // this ideally returns the value of the card
-//     //    console.log('slice' , playersPickedCard.slice(1));
-//    }
-
-   function playersCardValue(playersPickedCard) {
-    //converts the players  card into a number value
+    function playersCardValue(playersPickedCard) {
+    //converts the players card into a number value
+    console.log('The TEST playersPickedCard:', playersPickedCard);
     let playersPointsConversion = playersPickedCard.slice(1);
-    console.log('The playersPickedCard:', playersPickedCard);
-
-    
-    if (playersPickedCard.includes('A') || playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
+    if (playersPickedCard.includes('A')){
+        return 11;
+    } else if (playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
         return 10;
-    }
+    } else {
         return parseInt(playersPointsConversion);
+    }
    }
 
    function computersCardValue(computersPickedCard) {
     //converts the computers card into a number value
-    console.log('The computersPickedCard:', computersPickedCard);
-
+    console.log('The TEST computersPickedCard:', computersPickedCard);
     let computersPointsConversion = computersPickedCard.slice(1);
-    
-    if (computersPickedCard.includes('A') || computersPickedCard.includes('K') || computersPickedCard.includes('Q') || computersPickedCard.includes('J')) {
+    if (computersPickedCard.includes('A')){
+        return 11;
+    } else if (computersPickedCard.includes('K') || computersPickedCard.includes('Q') || computersPickedCard.includes('J')) {
         return 10;
+    } else {
+        return parseInt(computersPointsConversion);  
     }
-        return parseInt(computersPointsConversion);
    }
+//  both of the cardvalue functions ^^ work as intended
 
-   
-//    function determineWinner (playersPickedCard, computersPickedCard) {
-//        const playersCardValue = playersCardValue(playersPickedCard)
-//        const computersCardValue = getCardValue(computersPickedCard)
+   function determineWinner (playersCardValue, computersCardValue) {
+    // let playersCardValue2 = playersDrawValue(playersPickedCard);
+    // let computersCardValue2 = computersDrawValue(computersPickedCard);
+
+    // console.log('The value of the players card is TEST = ', playersCardValue2);    
+    // console.log('The value of the computers card is TEST = ', computersCardValue2);
+
+       console.log('players card value', playersCardValue);
+       console.log('computers card value', computersCardValue);
+       console.log('total cards',playersDeck.length + computersDeck.length);
        
-   
-//        if (playersCardValue > computersCardValue) {
-//            playersScore++
-//        }
-//        if (playersCardValue < computersCardValue) {
-//            computersScore++
-//        }
-//        console.log('TBD')
-//    }
+       if (playersCardValue > computersCardValue) {
+        let computersRemovedCard = computersDeck.splice(computersRndIdx,1)[0];
+        
+        playersDeck.push(computersRemovedCard);
+        
+        console.log('The Player wins this round!');
+           // remove card from computer and add to player check to see if its working. not yet...
+       }
+       if (playersCardValue < computersCardValue) {
+        let playersRemovedCard = playersDeck.splice(playersRndIdx,1)[0];
 
+        computersDeck.push(playersRemovedCard);
 
+           console.log('The Computer has won this round!');
+       } 
+       if (playersCardValue === computersCardValue){
+            console.log('Its a draw, try again!'); //also still getting the wrong calls for winners, ties never happen...
+       }
+       console.log('card added to players deck?', playersDeck.length);
+    console.log('card removed from computers deck?', computersDeck.length);    
+   }
+     
 
 const render = (playersPickedCard, computersPickedCard) => {
-    console.log('playerspickcard', playersPickedCard)
-    console.log('computersspickcard', computersPickedCard)
+    // console.log('The player drew', playersPickedCard)
+    // console.log('The computer drew ', computersPickedCard)
     // if (playersDeck.length === 0) make a game over function 
     // Removes outline class when first card is picked
     if (playersPickedDeck.length === 1) {  
@@ -104,58 +117,48 @@ const render = (playersPickedCard, computersPickedCard) => {
       playersDeckEl.classList.add("outline");
       playersDeckEl.classList.remove("back-blue");
     }
-    // trying to flip the computers card now
     if (computersPickedDeck.length === 1) {  
         computersPickedDeckEl.classList.remove("outline")
-    } // removes outline class when first card is picked
+    } 
     if (computersPickedDeck.length > 1) {  
         computersPickedDeckEl.classList.remove(removeComputersCard)
     }
-    // Set card to be removed on next click
     removeComputersCard = computersPickedCard  
-    // Apply current picked card class list. 
-   computersPickedDeckEl.classList.add(computersPickedCard)  
-    // If the deck is empty, add an outline and remove the card back color
+    computersPickedDeckEl.classList.add(computersPickedCard)  
     if (computersDeck.length === 0) {  
         computersDeckEl.classList.add("outline");
         computersDeckEl.classList.remove("back-blue");
       }
-
-
     const playerscardValue = playersCardValue(playersPickedCard);
     const computercardValue = computersCardValue(computersPickedCard);
     console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
     console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));    
-    // determineWinner(playersPickedCard,computersPickedCard) 
+    determineWinner(playersPickedCard,computersPickedCard) 
   }
 
 
+let playersRndIdx;
+let computersRndIdx;
 
 const handleClick = () => {
     let playersPickedCard
     let computersPickedCard 
     // prevents error when there are no cards left in the players deck
     if (playersDeck.length > 0) {
-        let playersRndIdx = Math.floor(Math.random() * playersDeck.length)
+        let playersRndIdx = Math.floor(Math.random() * playersDeck.length);
         //randomly select a number from the remaining cards
-        playersPickedCard = playersDeck.slice(playersRndIdx, playersRndIdx + 1)[0]
+        playersPickedCard = playersDeck.slice(playersRndIdx, playersRndIdx + 1)[0];
         // removes a card from the deck and assigns to a variable 
-        playersPickedDeck.push(playersPickedCard)
+        playersPickedDeck.push(playersPickedCard);
         //add the picked card to players face up deck
-        console.log(playersPickedCard, 'players picked card')
-        console.log('playersRndIdx', playersRndIdx)
-        // render(playersPickedCard)
+        // console.log(playersPickedCard, 'players picked card')
+        console.log('playersRndIdx', playersRndIdx);
     }
     if (computersDeck.length > 0) {
-        let computersRndIdx = Math.floor(Math.random() * computersDeck.length)
-        //randomly select a number from the remaining cards
-        computersPickedCard = computersDeck.slice(computersRndIdx, computersRndIdx + 1)[0]
-        // removes a card from the deck and assigns to a variable 
-        computersPickedDeck.push(computersPickedCard)
-        //add the picked card to computers face up
-        console.log(computersPickedCard, 'computers picked card')
-        console.log('computersRndIdx', computersRndIdx)
-        // render(computersPickedCard)
+        let computersRndIdx = Math.floor(Math.random() * computersDeck.length);
+        computersPickedCard = computersDeck.slice(computersRndIdx, computersRndIdx + 1)[0];
+        computersPickedDeck.push(computersPickedCard);
+        console.log('computersRndIdx', computersRndIdx);
     }
     render(playersPickedCard, computersPickedCard)
 }
@@ -170,18 +173,17 @@ function shuffleDeck(deck) {
     return newdeck; // Return the shuffled deck
 }
 // the code above shuffles the deck randomly into a newdeck
-console.log('deck', deck);
-console.log('shuffeled deck',shuffledDeck);
 
+console.log('original deck', deck);
+console.log('shuffeled deck',shuffledDeck);
 console.log('players deck',playersDeck);
 console.log('computers deck',computersDeck);
-
-
+//used to confrim that the original deck was split into 2 random decks
 
 // Event listeners
-// document.querySelector('#btn').addEventListener('click', ()=> console.log('clicked'))
 document.querySelector('#btn').addEventListener('click', handleClick)
 button.addEventListener('click', function() {
     count++;
-    display.textContent = `&nbsp;${count}&nbsp;`;
+    display.textContent = count;
 });
+//so far these work as intended
