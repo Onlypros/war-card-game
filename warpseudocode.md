@@ -39,4 +39,5 @@
 - cards left in deck?
 - icons for the computer and player
 - audio for the sound of cards shuffling, flipping, war...
+- make J 11, Q 12, K 13, A 14? or A just 11?
 

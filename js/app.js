@@ -33,27 +33,53 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
 
 // Functions
 
-function getCardValue(playersPickedCard) {
+// function getCardValue(playersPickedCard) {
+//     if (playersPickedCard.includes('A') || playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
+//         return 10;
+//     }
+//         return playersPickedCard.slice(1);
+//        // this ideally returns the value of the card
+//     //    console.log('slice' , playersPickedCard.slice(1));
+//    }
+
+   function playersCardValue(playersPickedCard) {
+    //converts the players  card into a number value
+    let playersPointsConversion = playersPickedCard.slice(1);
+    console.log('The playersPickedCard:', playersPickedCard);
+
+    
     if (playersPickedCard.includes('A') || playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
         return 10;
     }
-        return playersPickedCard.slice(1);
-       // this ideally returns the value of the card
+        return parseInt(playersPointsConversion);
    }
+
+   function computersCardValue(computersPickedCard) {
+    //converts the computers card into a number value
+    console.log('The computersPickedCard:', computersPickedCard);
+
+    let computersPointsConversion = computersPickedCard.slice(1);
+    
+    if (computersPickedCard.includes('A') || computersPickedCard.includes('K') || computersPickedCard.includes('Q') || computersPickedCard.includes('J')) {
+        return 10;
+    }
+        return parseInt(computersPointsConversion);
+   }
+
    
-   function determineWinner (playersPickedCard, computersPickedCard) {
-       const playerCardValue = getCardValue(playersPickedCard)
-       const computerCardValue = getCardValue(computersPickedCard)
+//    function determineWinner (playersPickedCard, computersPickedCard) {
+//        const playersCardValue = playersCardValue(playersPickedCard)
+//        const computersCardValue = getCardValue(computersPickedCard)
        
    
-       if (playerCardValue > computerCardValue) {
-           playersScore++
-       }
-       if (playerCardValue < computerCardValue) {
-           computersScore++
-       }
-       console.log('TBD')
-   }
+//        if (playersCardValue > computersCardValue) {
+//            playersScore++
+//        }
+//        if (playersCardValue < computersCardValue) {
+//            computersScore++
+//        }
+//        console.log('TBD')
+//    }
 
 
 
@@ -71,7 +97,7 @@ const render = (playersPickedCard, computersPickedCard) => {
     }
     // Set card to be removed on next click
     removePlayersCard = playersPickedCard  
-    // Apply current picked card deck2's class list. For example, if picked card was "h08", the the deck2El would gain the class "h08", which correlates to a background image of the eight of hearts. 
+    // Apply current picked card class list.  
     playersPickedDeckEl.classList.add(playersPickedCard)  
     // If the deck is empty, add an outline and remove the card back color
     if (playersDeck.length === 0) {  
@@ -87,7 +113,7 @@ const render = (playersPickedCard, computersPickedCard) => {
     }
     // Set card to be removed on next click
     removeComputersCard = computersPickedCard  
-    // Apply current picked card deck2's class list. For example, if picked card was "h08", the the deck2El would gain the class "h08", which correlates to a background image of the eight of hearts. 
+    // Apply current picked card class list. 
    computersPickedDeckEl.classList.add(computersPickedCard)  
     // If the deck is empty, add an outline and remove the card back color
     if (computersDeck.length === 0) {  
@@ -95,9 +121,12 @@ const render = (playersPickedCard, computersPickedCard) => {
         computersDeckEl.classList.remove("back-blue");
       }
 
-      const cardValue = getCardValue(playersPickedCard);
-      console.log('The value of the players cards = ', playersPickedCard);    
-    determineWinner(playersPickedCard,computersPickedCard) 
+
+    const playerscardValue = playersCardValue(playersPickedCard);
+    const computercardValue = computersCardValue(computersPickedCard);
+    console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
+    console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));    
+    // determineWinner(playersPickedCard,computersPickedCard) 
   }
 
 
