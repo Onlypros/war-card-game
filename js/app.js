@@ -62,26 +62,31 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
    }
 //  both of the cardvalue functions ^^ work as intended
 
-   function determineWinner (playersCardValue, computersCardValue) {    
-       if (playersCardValue > computersCardValue) {
-        let computersRemovedCard = computersDeck.splice(computersRndIdx,1)[0];
-        
+
+
+   function determineWinner (playersPickedCard, computersPickedCard) {    
+    console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
+    console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));
+    console.log(playersPickedCard);
+    console.log(computersPickedCard);
+
+    if (playersCardValue(playersPickedCard) > computersCardValue(computersPickedCard)) {
+        const computersRemovedCard = computersDeck.splice(computersDeck.indexOf(computersPickedCard), 1)[0];
         playersDeck.push(computersRemovedCard);
-        
         console.log('The Player wins this round!');
            // remove card from computer and add to player check to see if its working. not yet...
        }
-       if (playersCardValue < computersCardValue) {
-        let playersRemovedCard = playersDeck.splice(playersRndIdx,1)[0];
-
+       if (playersCardValue(playersPickedCard) < computersCardValue(computersPickedCard)) {
+        const playersRemovedCard = playersDeck.splice(playersDeck.indexOf(playersPickedCard), 1)[0];
         computersDeck.push(playersRemovedCard);
-
            console.log('The Computer has won this round!');
        } 
-       if (playersCardValue === computersCardValue){
+       if (playersCardValue(playersPickedCard) === computersCardValue(computersPickedCard)){
             console.log('Its a draw, try again!');
        }
     
+       
+
     console.log('playersdeck array length', playersDeck.length);
     console.log('computersdeck array length', computersDeck.length);    
     console.log('total cards after',playersDeck.length + computersDeck.length);
@@ -123,9 +128,8 @@ const render = (playersPickedCard, computersPickedCard) => {
       }
     // const playerscardValue = playersCardValue(playersPickedCard); delete soon
     // const computercardValue = computersCardValue(computersPickedCard); delete soon
-    console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
-    console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));    
-    determineWinner(playersCardValue(playersPickedCard), computersCardValue(computersPickedCard)) 
+        
+    determineWinner(playersPickedCard, computersPickedCard) 
   }
 
 
