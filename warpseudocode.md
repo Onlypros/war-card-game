@@ -3,11 +3,13 @@
 ## How to play
 <!-- 1. Take a deck of cards, shuffle and then split in half  -->
     - Half for the player and half for the computer
-2. Players then flip over the top card of their decks and place them in the middle
+<!-- 2. Players then flip over the top card of their decks and place them in the middle -->
     - Whoever has the highest card wins that round
         - increase winners score by 1 point
     - If there is a tie move onto the next round
 3. Repeat until all cards have been dealt
+    <!-- can deal more than 26 times so need to make it deal everything and end -->
+    <!-- added a click counter to draw a card -->
 4. Whoever has the highest score after 26 rounds wins
 5. Add a reset button so they can play again
 
@@ -37,3 +39,4 @@
 - cards left in deck?
 - icons for the computer and player
 - audio for the sound of cards shuffling, flipping, war...
+

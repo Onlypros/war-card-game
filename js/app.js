@@ -8,6 +8,7 @@ let computersScore = 0
 // pickedcard is playersPickedCard and computersPickedCard
 let removePlayersCard //might have issue here also
 let removeComputersCard //might have issue here also
+let count = 0; //tracking draw a card clicks
 
 
 
@@ -17,6 +18,10 @@ const shuffledDeck = shuffleDeck(deck);
 
 const playersDeck = shuffledDeck.slice(0, shuffledDeck.length / 2); // players draw deck
 const computersDeck = shuffledDeck.slice(shuffledDeck.length /2 , shuffledDeck.length); // computers draw deck
+
+const button = document.getElementById('btn');
+const display = document.getElementById('displayClicks');
+
 
 
 // Cached element references
@@ -28,9 +33,11 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
 
 // Functions
 
-function getCardValue(card) {
-    if (card.includes('A') || card.includes('K') || card.includes('Q') || card.includes('J') ) return 10
-        return card.slice(1)
+function getCardValue(playersPickedCard) {
+    if (playersPickedCard.includes('A') || playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
+        return 10;
+    }
+        return playersPickedCard.slice(1);
        // this ideally returns the value of the card
    }
    
@@ -88,8 +95,11 @@ const render = (playersPickedCard, computersPickedCard) => {
         computersDeckEl.classList.remove("back-blue");
       }
 
+      const cardValue = getCardValue(playersPickedCard);
+      console.log('The value of the players cards = ', playersPickedCard);    
     determineWinner(playersPickedCard,computersPickedCard) 
   }
+
 
 
 const handleClick = () => {
@@ -138,6 +148,11 @@ console.log('players deck',playersDeck);
 console.log('computers deck',computersDeck);
 
 
+
 // Event listeners
 // document.querySelector('#btn').addEventListener('click', ()=> console.log('clicked'))
 document.querySelector('#btn').addEventListener('click', handleClick)
+button.addEventListener('click', function() {
+    count++;
+    display.textContent = `&nbsp;${count}&nbsp;`;
+});
