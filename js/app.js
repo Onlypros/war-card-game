@@ -7,6 +7,7 @@ let playersScore = 0
 let computersScore = 0
 // pickedcard is playersPickedCard and computersPickedCard
 let removePlayersCard //might have issue here also
+let removeComputersCard //might have issue here also
 
 
 
@@ -22,7 +23,7 @@ const computersDeck = shuffledDeck.slice(shuffledDeck.length /2 , shuffledDeck.l
 let playersDeckEl = document.querySelector('#playersdeck') 
 let playersPickedDeckEl = document.querySelector('#playersPickedDeck')
 let computersDeckEl = document.querySelector('#computersdeck')
-let computersPickedDeckEl = document.querySelector('computersPickedCard')
+let computersPickedDeckEl = document.querySelector('#computersPickedCard')
 
 
 // Functions
@@ -44,7 +45,7 @@ function getCardValue(card) {
        if (playerCardValue < computerCardValue) {
            computersScore++
        }
-       console.log('tie')
+       console.log('TBD')
    }
 
 
@@ -57,23 +58,35 @@ const render = (playersPickedCard, computersPickedCard) => {
     if (playersPickedDeck.length === 1) {  
       playersPickedDeckEl.classList.remove("outline")
     }
-  
     // Remove previous picked card from playersPickedDeck class list. 
     if (playersPickedDeck.length > 1) {  
         playersPickedDeckEl.classList.remove(removePlayersCard)
     }
-  
     // Set card to be removed on next click
     removePlayersCard = playersPickedCard  
-  
     // Apply current picked card deck2's class list. For example, if picked card was "h08", the the deck2El would gain the class "h08", which correlates to a background image of the eight of hearts. 
     playersPickedDeckEl.classList.add(playersPickedCard)  
-  
     // If the deck is empty, add an outline and remove the card back color
     if (playersDeck.length === 0) {  
       playersDeckEl.classList.add("outline");
       playersDeckEl.classList.remove("back-blue");
     }
+    // trying to flip the computers card now
+    if (computersPickedDeck.length === 1) {  
+        computersPickedDeckEl.classList.remove("outline")
+    } // removes outline class when first card is picked
+    if (computersPickedDeck.length > 1) {  
+        computersPickedDeckEl.classList.remove(removeComputersCard)
+    }
+    // Set card to be removed on next click
+    removeComputersCard = computersPickedCard  
+    // Apply current picked card deck2's class list. For example, if picked card was "h08", the the deck2El would gain the class "h08", which correlates to a background image of the eight of hearts. 
+   computersPickedDeckEl.classList.add(computersPickedCard)  
+    // If the deck is empty, add an outline and remove the card back color
+    if (computersDeck.length === 0) {  
+        computersDeckEl.classList.add("outline");
+        computersDeckEl.classList.remove("back-blue");
+      }
 
     determineWinner(playersPickedCard,computersPickedCard) 
   }
@@ -84,25 +97,25 @@ const handleClick = () => {
     let computersPickedCard 
     // prevents error when there are no cards left in the players deck
     if (playersDeck.length > 0) {
-        let randomIndex1 = Math.floor(Math.random() * playersDeck.length)
+        let playersRndIdx = Math.floor(Math.random() * playersDeck.length)
         //randomly select a number from the remaining cards
-        playersPickedCard = playersDeck.slice(randomIndex1, randomIndex1 + 1)[0]
+        playersPickedCard = playersDeck.slice(playersRndIdx, playersRndIdx + 1)[0]
         // removes a card from the deck and assigns to a variable 
         playersPickedDeck.push(playersPickedCard)
         //add the picked card to players face up deck
         console.log(playersPickedCard, 'players picked card')
-        console.log('randomindex1', randomIndex1)
+        console.log('playersRndIdx', playersRndIdx)
         // render(playersPickedCard)
     }
     if (computersDeck.length > 0) {
-        let randomIndex2 = Math.floor(Math.random() * computersDeck.length)
+        let computersRndIdx = Math.floor(Math.random() * computersDeck.length)
         //randomly select a number from the remaining cards
-        computersPickedCard = computersDeck.slice(randomIndex2, randomIndex2 + 1)[0]
+        computersPickedCard = computersDeck.slice(computersRndIdx, computersRndIdx + 1)[0]
         // removes a card from the deck and assigns to a variable 
         computersPickedDeck.push(computersPickedCard)
         //add the picked card to computers face up
         console.log(computersPickedCard, 'computers picked card')
-        console.log('randomindex2', randomIndex2)
+        console.log('computersRndIdx', computersRndIdx)
         // render(computersPickedCard)
     }
     render(playersPickedCard, computersPickedCard)
@@ -126,5 +139,5 @@ console.log('computers deck',computersDeck);
 
 
 // Event listeners
-document.querySelector('#btn').addEventListener('click', ()=> console.log('clicked'))
+// document.querySelector('#btn').addEventListener('click', ()=> console.log('clicked'))
 document.querySelector('#btn').addEventListener('click', handleClick)
