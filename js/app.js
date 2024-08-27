@@ -62,17 +62,7 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
    }
 //  both of the cardvalue functions ^^ work as intended
 
-   function determineWinner (playersCardValue, computersCardValue) {
-    // let playersCardValue2 = playersDrawValue(playersPickedCard);
-    // let computersCardValue2 = computersDrawValue(computersPickedCard);
-
-    // console.log('The value of the players card is TEST = ', playersCardValue2);    
-    // console.log('The value of the computers card is TEST = ', computersCardValue2);
-
-       console.log('players card value', playersCardValue);
-       console.log('computers card value', computersCardValue);
-       console.log('total cards',playersDeck.length + computersDeck.length);
-       
+   function determineWinner (playersCardValue, computersCardValue) {    
        if (playersCardValue > computersCardValue) {
         let computersRemovedCard = computersDeck.splice(computersRndIdx,1)[0];
         
@@ -89,13 +79,15 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
            console.log('The Computer has won this round!');
        } 
        if (playersCardValue === computersCardValue){
-            console.log('Its a draw, try again!'); //also still getting the wrong calls for winners, ties never happen...
+            console.log('Its a draw, try again!');
        }
-       console.log('card added to players deck?', playersDeck.length);
-    console.log('card removed from computers deck?', computersDeck.length);    
+    
+    console.log('playersdeck array length', playersDeck.length);
+    console.log('computersdeck array length', computersDeck.length);    
+    console.log('total cards after',playersDeck.length + computersDeck.length);
    }
-     
 
+   
 const render = (playersPickedCard, computersPickedCard) => {
     // console.log('The player drew', playersPickedCard)
     // console.log('The computer drew ', computersPickedCard)
@@ -129,11 +121,11 @@ const render = (playersPickedCard, computersPickedCard) => {
         computersDeckEl.classList.add("outline");
         computersDeckEl.classList.remove("back-blue");
       }
-    const playerscardValue = playersCardValue(playersPickedCard);
-    const computercardValue = computersCardValue(computersPickedCard);
+    // const playerscardValue = playersCardValue(playersPickedCard); delete soon
+    // const computercardValue = computersCardValue(computersPickedCard); delete soon
     console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
     console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));    
-    determineWinner(playersPickedCard,computersPickedCard) 
+    determineWinner(playersCardValue(playersPickedCard), computersCardValue(computersPickedCard)) 
   }
 
 
@@ -150,8 +142,8 @@ const handleClick = () => {
         playersPickedCard = playersDeck.slice(playersRndIdx, playersRndIdx + 1)[0];
         // removes a card from the deck and assigns to a variable 
         playersPickedDeck.push(playersPickedCard);
-        //add the picked card to players face up deck
-        // console.log(playersPickedCard, 'players picked card')
+        //add the picked card to players picked deck
+        // console.log(playersPickedCard, 'players picked card') was just used for checking
         console.log('playersRndIdx', playersRndIdx);
     }
     if (computersDeck.length > 0) {
@@ -173,7 +165,6 @@ function shuffleDeck(deck) {
     return newdeck; // Return the shuffled deck
 }
 // the code above shuffles the deck randomly into a newdeck
-
 console.log('original deck', deck);
 console.log('shuffeled deck',shuffledDeck);
 console.log('players deck',playersDeck);
