@@ -12,9 +12,12 @@ let timer;
 let gameOver;
 
 
+
 // constats------------------------------------------------------------------------------
-const deck = ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"];
-const shuffledDeck = shuffleDeck(deck);
+let deck = ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"];
+// changed deck from const to let
+let shuffledDeck = shuffleDeck(deck);
+// changed shuffledeck from const to let
 
 const playersDeck = shuffledDeck.slice(0, shuffledDeck.length / 2); // players draw deck
 const computersDeck = shuffledDeck.slice(shuffledDeck.length /2 , shuffledDeck.length); // computers draw deck
@@ -62,11 +65,16 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
         resetBtnEl.classList.add('hidden');
         scoreBoard.playersScore = 0;
         scoreBoard.computersScore = 0;
+        const newShuffledDeck = resetDeck(); // Create a new shuffled deck
+        playersDeck = newShuffledDeck.slice(0, newShuffledDeck.length / 2);
+        computersDeck = newShuffledDeck.slice(newShuffledDeck.length / 2);
+        playersPickedDeck = [];
+        computersPickedDeck = [];
         // playersDeckEl.classList.remove("outline");
         // playersDeckEl.classList.add("back-blue");
         // computersDeckEl.classList.remove("outline");
         // computersDeckEl.classList.add("back-blue");
-        shuffleDeck(deck);
+        // shuffleDeck(deck);
         render();
     }
        
@@ -84,9 +92,12 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
     }
 
     function playersCardValue(playersPickedCard) {
-    //converts the players card into a number value
-    // console.log('The TEST playersPickedCard:', playersPickedCard); //prints 3 times!?
-    let playersPointsConversion = playersPickedCard.slice(1);
+        if (!playersPickedCard) {
+            console.error('playersPickedCard is undefined or invalid:', playersPickedCard);
+            return 0; // Or handle the error appropriately
+        }
+
+        let playersPointsConversion = playersPickedCard.slice(1);
     if (playersPickedCard.includes('A')){
         return 11;
     } else if (playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
@@ -95,6 +106,7 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
         return parseInt(playersPointsConversion);
     }
    }
+    //converts the players card into a number value^^^^^ 
 
    function computersCardValue(computersPickedCard) {
     //converts the computers card into a number value
@@ -188,8 +200,8 @@ const handleClick = () => {
     if (count === 0) {
         startCountdown(60, countDownElement);  // Start the countdown with 60 seconds
     }
-    let playersPickedCard
-    let computersPickedCard 
+    let playersPickedCard;
+    let computersPickedCard;
     // prevents error when there are no cards left in the players deck
     if (playersDeck.length > 0) {
         let playersRndIdx = Math.floor(Math.random() * playersDeck.length);
@@ -211,6 +223,7 @@ const handleClick = () => {
 }
 
 function shuffleDeck(deck) {
+    
     const newdeck = [...deck];
     for (let a = newdeck.length - 1; a > 0; a--) {
         const b = Math.floor(Math.random() * (a + 1));
@@ -218,6 +231,12 @@ function shuffleDeck(deck) {
     }
     return newdeck; // Return the shuffled deck
 }
+
+function resetDeck (){
+    deck = ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"];
+    return shuffleDeck(deck);
+} 
+
 // the code above shuffles the deck randomly into a newdeck
 console.log('original deck', deck);
 console.log('shuffeled deck',shuffledDeck);
