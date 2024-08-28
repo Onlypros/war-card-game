@@ -1,6 +1,6 @@
 // Variables---------------------------------------------------------------------------
-let playersPickedDeck = []//player card selected at random to be place face up formerly 'playersPickedCard' think was error
-let computersPickedDeck = []//computer card selected at random to be place face up formerly 'computesPickedCard' think was error
+let playersPickedDeck = []; //players drawn card pile
+let computersPickedDeck = []; //computers draw card pile
 // let playersScore = playersDeck.length; use later?
 // let computersScore = computersDeck.length; use later?
 // let gameover; use later?
@@ -12,15 +12,12 @@ let timer;
 let gameOver;
 
 
-
 // constats------------------------------------------------------------------------------
-let deck = ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"];
-// changed deck from const to let
+const deck = ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"];
 let shuffledDeck = shuffleDeck(deck);
-// changed shuffledeck from const to let
 
-const playersDeck = shuffledDeck.slice(0, shuffledDeck.length / 2); // players draw deck
-const computersDeck = shuffledDeck.slice(shuffledDeck.length /2 , shuffledDeck.length); // computers draw deck
+let playersDeck = shuffledDeck.slice(0, shuffledDeck.length / 2); // players draw deck
+let computersDeck = shuffledDeck.slice(shuffledDeck.length /2 , shuffledDeck.length); // computers draw deck
 
 const button = document.getElementById('btn');
 const display = document.querySelector('.displayClicks');
@@ -65,17 +62,19 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
         resetBtnEl.classList.add('hidden');
         scoreBoard.playersScore = 0;
         scoreBoard.computersScore = 0;
-        const newShuffledDeck = resetDeck(); // Create a new shuffled deck
-        playersDeck = newShuffledDeck.slice(0, newShuffledDeck.length / 2);
-        computersDeck = newShuffledDeck.slice(newShuffledDeck.length / 2);
-        playersPickedDeck = [];
-        computersPickedDeck = [];
+        playersScoreScoreboardEl.textContent = scoreBoard.playersScore
+        computersScoreScoreboardEl.textContent = scoreBoard.computersScore
+        count= 0
+        display.textContent = `You have drawn ${count} cards.`;
+        button.classList.remove('hidden');
         // playersDeckEl.classList.remove("outline");
         // playersDeckEl.classList.add("back-blue");
         // computersDeckEl.classList.remove("outline");
         // computersDeckEl.classList.add("back-blue");
-        // shuffleDeck(deck);
-        render();
+        shuffledDeck = shuffleDeck(deck);
+        playersDeck = shuffledDeck.slice(0, shuffledDeck.length / 2); 
+        computersDeck = shuffledDeck.slice(shuffledDeck.length /2 , shuffledDeck.length);
+
     }
        
     function startCountdown(duration, displayElement) {
@@ -87,17 +86,16 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
                 clearInterval(interval);
                 displayElement.textContent = 'Time is up!';
                 resetBtnEl.classList.remove('hidden');
+                button.classList.add('hidden');
+
             }
         }, 100);
     }
 
     function playersCardValue(playersPickedCard) {
-        if (!playersPickedCard) {
-            console.error('playersPickedCard is undefined or invalid:', playersPickedCard);
-            return 0; // Or handle the error appropriately
-        }
-
-        let playersPointsConversion = playersPickedCard.slice(1);
+    //converts the players card into a number value
+    // console.log('The TEST playersPickedCard:', playersPickedCard); //prints 3 times!?
+    let playersPointsConversion = playersPickedCard.slice(1);
     if (playersPickedCard.includes('A')){
         return 11;
     } else if (playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
@@ -106,7 +104,6 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
         return parseInt(playersPointsConversion);
     }
    }
-    //converts the players card into a number value^^^^^ 
 
    function computersCardValue(computersPickedCard) {
     //converts the computers card into a number value
@@ -200,8 +197,8 @@ const handleClick = () => {
     if (count === 0) {
         startCountdown(60, countDownElement);  // Start the countdown with 60 seconds
     }
-    let playersPickedCard;
-    let computersPickedCard;
+    let playersPickedCard
+    let computersPickedCard 
     // prevents error when there are no cards left in the players deck
     if (playersDeck.length > 0) {
         let playersRndIdx = Math.floor(Math.random() * playersDeck.length);
@@ -223,7 +220,6 @@ const handleClick = () => {
 }
 
 function shuffleDeck(deck) {
-    
     const newdeck = [...deck];
     for (let a = newdeck.length - 1; a > 0; a--) {
         const b = Math.floor(Math.random() * (a + 1));
@@ -231,12 +227,6 @@ function shuffleDeck(deck) {
     }
     return newdeck; // Return the shuffled deck
 }
-
-function resetDeck (){
-    deck = ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"];
-    return shuffleDeck(deck);
-} 
-
 // the code above shuffles the deck randomly into a newdeck
 console.log('original deck', deck);
 console.log('shuffeled deck',shuffledDeck);
