@@ -1,4 +1,4 @@
-// Variables
+// Variables---------------------------------------------------------------------------
 let playersPickedDeck = []//player card selected at random to be place face up formerly 'playersPickedCard' think was error
 let computersPickedDeck = []//computer card selected at random to be place face up formerly 'computesPickedCard' think was error
 // let playersScore = playersDeck.length; use later?
@@ -12,7 +12,7 @@ let timer;
 let gameOver;
 
 
-// constats
+// constats------------------------------------------------------------------------------
 const deck = ["dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02","hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02","cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02","sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"];
 const shuffledDeck = shuffleDeck(deck);
 
@@ -23,43 +23,52 @@ const button = document.getElementById('btn');
 const display = document.querySelector('.displayClicks');
 //everything above checks out ^^
 
+const playersScoreScoreboardEl = document.getElementById('players-score');
+const computersScoreScoreboardEl = document.getElementById('computers-score');
+console.log(playersScoreScoreboardEl); //check that they are working?
+console.log(computersScoreScoreboardEl); //check that they are working?
+const countDownElement = document.getElementById('countdown-display');
+const messages = document.getElementById('messages');
+const resetBtnEl = document.getElementById('restart')
+
+
 const messagesText = [
     'You won this draw!',
     'The Computer has won this draw!',
-    'Its a draw, try again!'
+    'Its a draw, try again!',
+    'Draw a card to begin'
 ]
 
-// const scoreBoard = {
-//     playersScore: 0,
-//     computersScore: 0,
-// }; 
+const scoreBoard = {
+    playersScore: 0,
+    computersScore: 0,
+}; 
 
 // left here for now to implement later to reset game?
 
 
-// Cached element references
+// Cached element references-----------------------------------------------------------------
 let playersDeckEl = document.querySelector('#playersdeck') 
-let playersPickedDeckEl = document.querySelector('#playersPickedDeck')
+let playersPickedDeckEl = document.querySelector('#playersPickedCard')
 let computersDeckEl = document.querySelector('#computersdeck')
 let computersPickedDeckEl = document.querySelector('#computersPickedCard')
 
-// const timer???
-const playersScoreScoreboardEl = document.getElementById('players-score');
-const computersScoreScoreboardEl = document.getElementById('computers-score');
-// console.log(playersScoreScoreboardEl); //check that they are working?
-// console.log(computerssScoreScoreboardEl); //check that they are working?
-const countDownElement = document.getElementById('countdown-display');
-const messages = document.getElementById('messages');
 
+// Functions--------------------------------------------------------------------------------
 
-// Functions
-
-    // function init {
-    //     scoreboard.playerScore = 0;
-    //     scoreboard.computersScore = 0;
-    //     gameOver = false;
-    //     timer = setInterval(6000);
-    // }
+      function init (){
+        countDownElement.textContent = '60 seconds remaining';
+        messages.textContent = messagesText[3];
+        resetBtnEl.classList.add('hidden');
+        scoreBoard.playersScore = 0;
+        scoreBoard.computersScore = 0;
+        // playersDeckEl.classList.remove("outline");
+        // playersDeckEl.classList.add("back-blue");
+        // computersDeckEl.classList.remove("outline");
+        // computersDeckEl.classList.add("back-blue");
+        shuffleDeck(deck);
+        render();
+    }
        
     function startCountdown(duration, displayElement) {
         let countDownTime = duration;
@@ -69,13 +78,10 @@ const messages = document.getElementById('messages');
             if (countDownTime <= 0) {
                 clearInterval(interval);
                 displayElement.textContent = 'Time is up!';
+                resetBtnEl.classList.remove('hidden');
             }
-        }, 1000);
+        }, 100);
     }
-
-    // start it on the buton click
-    
-
 
     function playersCardValue(playersPickedCard) {
     //converts the players card into a number value
@@ -104,41 +110,39 @@ const messages = document.getElementById('messages');
    }
 //  both of the cardvalue functions ^^ work as intended
 
-
-
    function determineWinner (playersPickedCard, computersPickedCard) {    
-    console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
-    console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));
-    console.log('players card', playersPickedCard);
-    console.log('computers card', computersPickedCard);
+    // console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
+    // console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));
+    // console.log('players card', playersPickedCard);
+    // console.log('computers card', computersPickedCard);
 
     if (playersCardValue(playersPickedCard) > computersCardValue(computersPickedCard)) {
         const computersRemovedCard = computersDeck.splice(computersDeck.indexOf(computersPickedCard), 1)[0];
         playersDeck.push(computersRemovedCard);
         messages.textContent = messagesText[0];
+        scoreBoard.playersScore += 1 ;
         // console.log('The Player wins this round!');
-           // remove card from computer and add to player check to see if its working. not yet...
+        // remove card from computer and add to player check to see if its working. not yet...
        }
        if (playersCardValue(playersPickedCard) < computersCardValue(computersPickedCard)) {
         const playersRemovedCard = playersDeck.splice(playersDeck.indexOf(playersPickedCard), 1)[0];
         computersDeck.push(playersRemovedCard);
         messages.textContent = messagesText[1];
+        scoreBoard.computersScore += 1 ;
         //    console.log('The Computer has won this round!');
        } 
        if (playersCardValue(playersPickedCard) === computersCardValue(computersPickedCard)){
         messages.textContent = messagesText[2];
         // console.log('Its a draw, try again!');
        }
-    
-       
-
-    console.log('playersdeck array length', playersDeck.length);
-    console.log('computersdeck array length', computersDeck.length);    
+    // console.log('playersdeck array length', playersDeck.length);
+    // console.log('computersdeck array length', computersDeck.length);    
     // console.log('total cards after',playersDeck.length + computersDeck.length);
    }
 
-   
 const render = (playersPickedCard, computersPickedCard) => {
+    playersScoreScoreboardEl.textContent = scoreBoard.playersScore
+    computersScoreScoreboardEl.textContent = scoreBoard.computersScore
     // console.log('The player drew', playersPickedCard)
     // console.log('The computer drew ', computersPickedCard)
     // if (playersDeck.length === 0) make a game over function 
@@ -177,7 +181,6 @@ const render = (playersPickedCard, computersPickedCard) => {
     determineWinner(playersPickedCard, computersPickedCard) 
   }
 
-
 let playersRndIdx;
 let computersRndIdx;
 
@@ -207,7 +210,6 @@ const handleClick = () => {
     render(playersPickedCard, computersPickedCard)
 }
 
-
 function shuffleDeck(deck) {
     const newdeck = [...deck];
     for (let a = newdeck.length - 1; a > 0; a--) {
@@ -217,16 +219,17 @@ function shuffleDeck(deck) {
     return newdeck; // Return the shuffled deck
 }
 // the code above shuffles the deck randomly into a newdeck
-// console.log('original deck', deck);
-// console.log('shuffeled deck',shuffledDeck);
+console.log('original deck', deck);
+console.log('shuffeled deck',shuffledDeck);
 console.log('players deck',playersDeck);
 console.log('computers deck',computersDeck);
 //used to confrim that the original deck was split into 2 random decks
 
-// Event listeners
+// Event listeners--------------------------------------------------------------------------------
 document.querySelector('#btn').addEventListener('click', handleClick)
 button.addEventListener('click', function() {
     count++;
-    display.textContent = `Draw a card has been clicked ${count} times.`;
+    display.textContent = `You have drawn ${count} cards.`;
 });
+resetBtnEl.addEventListener('click', init);
 //so far these work as intended
