@@ -23,6 +23,12 @@ const button = document.getElementById('btn');
 const display = document.querySelector('.displayClicks');
 //everything above checks out ^^
 
+const messagesText = [
+    'You won this draw!',
+    'The Computer has won this draw!',
+    'Its a draw, try again!'
+]
+
 // const scoreBoard = {
 //     playersScore: 0,
 //     computersScore: 0,
@@ -43,7 +49,7 @@ const computersScoreScoreboardEl = document.getElementById('computers-score');
 // console.log(playersScoreScoreboardEl); //check that they are working?
 // console.log(computerssScoreScoreboardEl); //check that they are working?
 const countDownElement = document.getElementById('countdown-display');
-
+const messages = document.getElementById('messages');
 
 
 // Functions
@@ -109,16 +115,19 @@ const countDownElement = document.getElementById('countdown-display');
     if (playersCardValue(playersPickedCard) > computersCardValue(computersPickedCard)) {
         const computersRemovedCard = computersDeck.splice(computersDeck.indexOf(computersPickedCard), 1)[0];
         playersDeck.push(computersRemovedCard);
-        console.log('The Player wins this round!');
+        messages.textContent = messagesText[0];
+        // console.log('The Player wins this round!');
            // remove card from computer and add to player check to see if its working. not yet...
        }
        if (playersCardValue(playersPickedCard) < computersCardValue(computersPickedCard)) {
         const playersRemovedCard = playersDeck.splice(playersDeck.indexOf(playersPickedCard), 1)[0];
         computersDeck.push(playersRemovedCard);
-           console.log('The Computer has won this round!');
+        messages.textContent = messagesText[1];
+        //    console.log('The Computer has won this round!');
        } 
        if (playersCardValue(playersPickedCard) === computersCardValue(computersPickedCard)){
-            console.log('Its a draw, try again!');
+        messages.textContent = messagesText[2];
+        // console.log('Its a draw, try again!');
        }
     
        

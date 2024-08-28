@@ -96,8 +96,12 @@ body {
     font-size: 24px;
   } 
 
-  .game-messages{
-    text-align: center;
+  #restart {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    align-self: center;
+    margin: 50px 0 25px 0;
 }
 
   .hidden{
@@ -106,5 +110,5 @@ body {
 
   #countdown-display{
     text-align: center;
+    font-size: 24px;
   }
-  
