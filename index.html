@@ -9,8 +9,15 @@
 	<script defer src="./js/app.js"></script>
 	<title>War Card Game</title>
 </head>
+
 <body>
-    <section class="score-board">
+    <header>
+        <h1>Let's play war!</h1>
+    </header>
+    
+    <div id="countdown-display">60 seconds remaining</div>
+
+    <section class="score-wrapper">
         <p>Computers Score:
             <span id="computers-score">...</span>
         </p>
@@ -34,9 +41,21 @@
 	    </div>
 	</div> 
 
+    <section class="game-messages">
+        <h2 id="messages">
+            player wins draw, compueter wins draw, X wins the game
+        </h2>
+        <button id="restart" class="hidden">Play Again?</button>
+    </section>
+
     <button id="btn" class="btn">Draw a card</button>
-    <p>Draw a card has been clicked <span id="displayClicks"> 0 </span>
-    times.
+    <p class="draw displayClicks">Draw cards has been clicked 0 times.
+    
     </p>
 </body>
 </html>
+
+
+<!-- finish win conditon
+reset button working
+score working -->

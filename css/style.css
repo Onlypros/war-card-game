@@ -1,5 +1,5 @@
 body {
-    background-color: #696969;
+    background-color: #db1d1d;
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -76,3 +76,35 @@ body {
     display: flex;
     justify-content:center;
   }
+  header {
+    text-align: center;
+
+  }  
+
+  .score-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 24px;
+  }
+
+  .draw {
+    color: black;
+    font-size: 24px;
+  }  
+
+  .game-time {
+    font-size: 24px;
+  } 
+
+  .game-messages{
+    text-align: center;
+}
+
+  .hidden{
+    /* visibility: hidden; */
+  }
+
+  #countdown-display{
+    text-align: center;
+  }
+  
