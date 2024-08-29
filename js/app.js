@@ -36,7 +36,10 @@ const messagesText = [
     'You won this draw!',
     'The Computer has won this draw!',
     'Its a draw, try again!',
-    'Draw a card to begin'
+    'Draw a card to begin',
+    'computer wins game',
+    'player wins game',
+    'You tied'
 ]
 
 const scoreBoard = {
@@ -87,10 +90,24 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
                 displayElement.textContent = 'Time is up!';
                 resetBtnEl.classList.remove('hidden');
                 button.classList.add('hidden');
-
+                gameWinner();
             }
         }, 100);
     }
+
+    function gameWinner() {
+        console.log(scoreBoard)
+        
+        if (scoreBoard.playersScore > scoreBoard.computersScore){
+            messages.textContent=messagesText[5];
+        } else if (scoreBoard.playersScore < scoreBoard.computersScore){
+            messages.textContent=messagesText[4];
+        } else if (scoreBoard.playersScore === scoreBoard.computersScore) {
+            messages.textContent=messagesText[6];
+        }
+    }
+
+
 
     function playersCardValue(playersPickedCard) {
     //converts the players card into a number value
@@ -119,7 +136,10 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
    }
 //  both of the cardvalue functions ^^ work as intended
 
-   function determineWinner (playersPickedCard, computersPickedCard) {    
+
+
+
+   function handWinner (playersPickedCard, computersPickedCard) {    
     // console.log('The value of the players card is = ', playersCardValue(playersPickedCard));    
     // console.log('The value of the computers card is = ', computersCardValue(computersPickedCard));
     // console.log('players card', playersPickedCard);
@@ -150,8 +170,8 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
    }
 
 const render = (playersPickedCard, computersPickedCard) => {
-    playersScoreScoreboardEl.textContent = scoreBoard.playersScore
-    computersScoreScoreboardEl.textContent = scoreBoard.computersScore
+   
+    
     // console.log('The player drew', playersPickedCard)
     // console.log('The computer drew ', computersPickedCard)
     // if (playersDeck.length === 0) make a game over function 
@@ -187,7 +207,9 @@ const render = (playersPickedCard, computersPickedCard) => {
     // const playerscardValue = playersCardValue(playersPickedCard); delete soon
     // const computercardValue = computersCardValue(computersPickedCard); delete soon
         
-    determineWinner(playersPickedCard, computersPickedCard) 
+    handWinner(playersPickedCard, computersPickedCard) 
+    playersScoreScoreboardEl.textContent = scoreBoard.playersScore
+    computersScoreScoreboardEl.textContent = scoreBoard.computersScore
   }
 
 let playersRndIdx;

@@ -41,3 +41,17 @@
 - audio for the sound of cards shuffling, flipping, war...
 - make J 11, Q 12, K 13, A 14? or A just 11?
 
+
+
+
+
+
+finish win conditon - based on timer just nee to make winner text
+<!-- reset button working - yes? -->
+<!-- score board working -->
+<!-- make it load score o to o -->
+<!-- need to make draw a card not clickable after 60 seconds -->
+<!-- get cards to reset done -->
+add a final messge for the game winner
+make a win threshold
+a hidden message area that turns visbiel with one of 3 answers
