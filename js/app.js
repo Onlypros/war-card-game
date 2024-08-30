@@ -48,8 +48,8 @@ const cardsRemaining = {
     playerremaining: 26,
 }
 
-console.log('computers remaining cards', cardsRemaining.computerremaining);
-console.log('players remaining cards', cardsRemaining.playerremaining);
+// console.log('computers remaining cards', cardsRemaining.computerremaining);
+// console.log('players remaining cards', cardsRemaining.playerremaining);
 
 // Cached element references-----------------------------------------------------------------
 let playersDeckEl = document.querySelector('#playersdeck') 
@@ -108,8 +108,12 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
     // console.log('The TEST playersPickedCard:', playersPickedCard); //confirms players card prints 3 times!?
     let playersPointsConversion = playersPickedCard.slice(1);
     if (playersPickedCard.includes('A')){
+        return 13;
+    } else if (playersPickedCard.includes('K')) {
+        return 12;
+    } else if (playersPickedCard.includes('Q')) {
         return 11;
-    } else if (playersPickedCard.includes('K') || playersPickedCard.includes('Q') || playersPickedCard.includes('J')) {
+    }  else if (playersPickedCard.includes('J')) {
         return 10;
     } else {
         return parseInt(playersPointsConversion);
@@ -120,8 +124,12 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
     // console.log('The TEST computersPickedCard:', computersPickedCard); //confirms computers card prints 3 times!?
     let computersPointsConversion = computersPickedCard.slice(1);
     if (computersPickedCard.includes('A')){
+        return 13;
+    } else if (computersPickedCard.includes('K')) {
+        return 12;
+    } else if (computersPickedCard.includes('Q')) {
         return 11;
-    } else if (computersPickedCard.includes('K') || computersPickedCard.includes('Q') || computersPickedCard.includes('J')) {
+    }  else if (computersPickedCard.includes('J')) {
         return 10;
     } else {
         return parseInt(computersPointsConversion);  
@@ -170,8 +178,6 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
    }
 
 const render = (playersPickedCard, computersPickedCard) => {
-   
-    
     // console.log('The player drew', playersPickedCard)
     // console.log('The computer drew ', computersPickedCard)
     // if (playersDeck.length === 0) make a game over function 

@@ -54,10 +54,11 @@ finish win conditon - based on timer just nee to make winner text
 <!-- get cards to reset done -->
 add a final messge for the game winner
 make a win threshold
-a hidden message area that turns visbiel with one of 3 answers
-made J 10, Q 11, K 12, A 13
+<!-- a hidden message area that turns visbiel with one of 3 answers -->
+<!-- made J 10, Q 11, K 12, A 13 -->
 make a background for the game
+add icons for the players
 add a counter for cards in the deck
 trying to make the picked card deck clear back to the blue outline but the cards still show with the outline
 
-make element for computer deck size and players then add value = to playersDeck.length +1, computersDeck.length +1
+make element for computer deck size and players then add value = to playersDeck.length +1, computersDeck.length +1?

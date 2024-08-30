@@ -1,5 +1,11 @@
 body {
+    background-image: url('https://www.coololdgames.com/wp-content/uploads/2022/10/war-card-game.png'); /* Path to your image */
+    background-size: contain; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
     background-color: #db1d1d;
+
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -9,7 +15,6 @@ body {
   
 html,body {
   height: 100%;
-  
 }
 
   .container {
@@ -138,4 +143,15 @@ html,body {
 
   #cr {
     font-size: 24px;
+  }
+
+  .fa-solid.fa-robot {
+    display: flex;
+    font-size: 100px;
+  }
+
+  .fa-solid.fa-face-smile{
+    display: flex;
+    font-size: 100px;
+    justify-content: right;
   }
