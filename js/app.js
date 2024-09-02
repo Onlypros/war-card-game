@@ -59,7 +59,7 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
 
 // Functions--------------------------------------------------------------------------------
       function init (){
-        countDownElement.textContent = '60 seconds remaining';
+        countDownElement.textContent = '30 seconds remaining';
         messages.textContent = messagesText[3];
         resetBtnEl.classList.add('hidden');
         scoreBoard.playersScore = 0;
@@ -90,8 +90,20 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
                 button.classList.add('hidden');
                 gameWinner();
             }
-        }, 100);
+        }, 1000);
     } //these are the settings for the time and what happens when it expires
+
+
+    function endGame () {
+        if (countDownTime <= 0) {
+            clearInterval(interval);
+            displayElement.textContent = 'Time is up!';
+            resetBtnEl.classList.remove('hidden');
+            button.classList.add('hidden');
+            gameWinner();
+        }
+    }
+
 
     function gameWinner() {
         // console.log(scoreBoard) //shows the scoreboard to confirm everythings working right
@@ -170,8 +182,8 @@ let computersPickedDeckEl = document.querySelector('#computersPickedCard')
         messages.textContent = messagesText[2];
         // console.log('Its a draw, try again!'); confirms a tie
        }
-    // console.log('playersdeck array length', playersDeck.length); //confirms the arrays are adjusting properly
-    // console.log('computersdeck array length', computersDeck.length); //confirms the arrays are adjusting properly
+    console.log('playersdeck array length', playersDeck.length); //confirms the arrays are adjusting properly
+    console.log('computersdeck array length', computersDeck.length); //confirms the arrays are adjusting properly
     // console.log('total cards after',playersDeck.length + computersDeck.length); // confirms total cards always equal 52
     playersCardRemainingEl.textContent = cardsRemaining.playerremaining;
     computersCardRemainingEl.textContent = cardsRemaining.computerremaining;
@@ -221,7 +233,7 @@ let computersRndIdx;
 
 const handleClick = () => {
     if (count === 0) {
-        startCountdown(60, countDownElement);  // Start the countdown with 60 seconds
+        startCountdown(30, countDownElement);  // Start the countdown with 60 seconds
     }
     let playersPickedCard
     let computersPickedCard 
