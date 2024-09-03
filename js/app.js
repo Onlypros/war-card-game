@@ -209,4 +209,4 @@ button.addEventListener('click', function() {
     count++;
     display.textContent = `You have drawn ${count} cards.`;
 });
-resetBtnEl.addEventListener('click', init);
+resetBtnEl.addEventListener('click', init);git 
