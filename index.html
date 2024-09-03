@@ -15,18 +15,13 @@
     <header>
         <h1>Let's play war!</h1>
     </header>
-    
     <div id="countdown-display">30 seconds remaining</div>
-
 	<div class="playerIcons">
 		<div>
-			<i class="fa-solid fa-robot"></i>
-			<i class="fa-solid fa-face-smile"></i>
+			<i class="fa-solid fa-robot" aria-label="A icon of a robot to represent the computer oppenent"></i>
+			<i class="fa-solid fa-face-smile" aria-label="A smiley face icon to represent the player "></i>
 		</div>
 	</div>
-	
-	
-
     <section class="score-wrapper">
         <p>Computers Score:
             <span id="computers-score">0</span>
@@ -35,16 +30,14 @@
             <span id="players-score">0</span>
         </p>
     </section>
-
 	<section class='cardsRemaining'>
-		<p id="cr">Player Cards remaining: 
+		<p id="pcr">Computers cards remaining: 
 			<span id='computerscardsremaining'>26</span>
 		</p>
-		<p id="cr">Player Cards remaining: 
+		<p id="ccr">Player cards remaining: 
 			<span id='playersscardsremaining'>26</span>
 		</p>
 	</section>
-
 	<div class="container">
 	    <div class="computer">
 		    <div id="computersDeck" class="computer card large back-blue shadow"></div>
@@ -59,16 +52,9 @@
 		    <div id="playersDeck" class="player card large back-blue shadow"></div>
 	    </div>
 	</div> 
-
     <div id='messages'></div>
-
     <button id="btn" class="btn">Draw a card</button>
-
     <button id="restart" class="hidden">Play Again?</button>
-    <p class="draw displayClicks">You have drawn 0 cards.
-    
-    </p>
+    <p class="draw displayClicks">You have drawn 0 cards.</p>
 </body>
 </html>
-
-
