@@ -45,8 +45,8 @@
 
 
 
-
-finish win conditon - based on timer just nee to make winner text
+notes
+finish win conditon - based on timer just need to make winner text
 <!-- reset button working - yes? -->
 <!-- score board working -->
 <!-- make it load score o to o -->
@@ -60,5 +60,4 @@ make a background for the game
 add icons for the players
 add a counter for cards in the deck
 trying to make the picked card deck clear back to the blue outline but the cards still show with the outline
-
 make element for computer deck size and players then add value = to playersDeck.length +1, computersDeck.length +1?

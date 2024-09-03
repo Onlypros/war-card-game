@@ -69,7 +69,7 @@ let computersPickedDecksEl = document.querySelector('#computersPickedCard')
                 button.classList.add('hidden');
                 gameWinner();
             }
-        }, 100);
+        }, 1000);
     } 
 
     function gameWinner() {
