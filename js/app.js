@@ -116,8 +116,6 @@ let computersPickedDecksEl = document.querySelector('#computersPickedCard')
     }
    } 
 
-
-
    function handWinner (playersPickedCard, computersPickedCard) {    
     if (playersCardValue(playersPickedCard) > computersCardValue(computersPickedCard)) {
         const computersRemovedCard = computersDeck.splice(computersDeck.indexOf(computersPickedCard), 1)[0];
